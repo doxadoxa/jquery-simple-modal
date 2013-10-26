@@ -1,11 +1,11 @@
 jquery-simple-modal
 ===================
 1. Create modal box and button which call it    
-`<a href='#' id='modal-box-a' rel='modal-box'>Click</a>   
-<div id='modal-box' style='display:none;'>   
-<h2>Hello from modal box!</h2>   
-</div>
-`
+`<a href='#' id='modal-box-a' rel='modal-box'>Click</a>`   
+`<div id='modal-box' style='display:none;'>`    
+`<h2>Hello from modal box!</h2>`    
+`</div>`   
+
 2. Add in script block after jQuery and page initialization   
 `$('modal-box-a').modal()`
 
