@@ -14,7 +14,9 @@ MIT License
 		var opacity = typeof( options.opacity ) != undefined ? options.opacity : '.80';
 
 
-		$(this).click( function () {
+		$(this).click( function (e) {
+			e.preventDefault();
+			
 			$('#' + popupid).fadeIn();
 
 			$('body').append('<div id="fade"></div>');
