@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="javascripts/scale.fix.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="javascripts/modal.jquery.js"></script>    
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
@@ -39,9 +39,10 @@
       <section>
         <h1>
 <a name="jquery-simple-modal" class="anchor" href="#jquery-simple-modal"><span class="octicon octicon-link"></span></a>jquery-simple-modal</h1>
-<hr/>
-<a href="#" id="modal-box-a" rel="modal-box">click to show modal</a>
-<div id="modal-box" style="width:200px; margin: 0 auto; padding: 20px;display:none"><h2>Hello from modal box</h2></div>
+<br/>
+<a href="#" id="modal-box-a" rel="modal-box" style="display:block;color:#fff;background: #C30000;padding:10px;width:121px;">click to show modal</a>
+<br/>
+<div id="modal-box" style="width:200px; margin: 0 auto; padding: 20px;display:none;background:#fff;z-index:100000"><h2>Hello from modal box</h2></div>
 <ol>
 <li><p>Create modal box and button which call it<br><code>&lt;a href='#' id='modal-box-a' rel='modal-box'&gt;Click&lt;/a&gt;</code><br><code>&lt;div id='modal-box' style='display:none;'&gt;</code><br><code>&lt;h2&gt;Hello from modal box!&lt;/h2&gt;</code><br><code>&lt;/div&gt;</code>   </p></li>
 <li><p>Add in script block after jQuery and page initialization<br><code>$('modal-box-a').modal()</code></p></li>

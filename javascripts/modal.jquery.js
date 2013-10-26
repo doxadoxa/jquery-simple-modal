@@ -41,18 +41,23 @@ MIT License
 			'left' : '50%',
 			'position' : 'fixed'
 			});
+
+			$("#fade").click( closer );
+
 		});
 
 
-		var closer = function() {
-			$('#' + popupid+", #fade" ).fadeOut();
+		var closer = function( e ) {
+			e.preventDefault();
+			$('#' + popupid+", #fade" ).fadeOut( 'fast', function() {
+				$("#fade").detach();
+			});
 		}
 
 		if ( typeof( options.close ) != undefined ) {
 			$( "#" + options.close ).click( closer );
 		}
 
-		$("#fade").click( closer );
 		return this;
 	};
 
