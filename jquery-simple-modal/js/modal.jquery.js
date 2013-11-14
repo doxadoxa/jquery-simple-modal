@@ -7,19 +7,10 @@ MIT License
 	var defaults = { 'bgColor' : '#000', 'opacity' : '0.8'};
 	var options;
 
-	$.fn.modal = function ( params ) {
-		options = $.extend({}, defaults, options, params);
+	var showModal = function( elem, params ) {
+		$(elem).fadeIn();
 
-		var popupid = $(this).attr('rel');
-		var opacity = typeof( options.opacity ) != undefined ? options.opacity : '.80';
-
-
-		$(this).click( function (e) {
-			e.preventDefault();
-			
-			$('#' + popupid).fadeIn();
-
-			$('body').append('<div id="fade"></div>');
+		$('body').append('<div id="fade"></div>');
 			$("#fade").css( { 
 				'display' : 'none', /* Скрыто по умолчанию */
 				'background' : options.bgColor,
@@ -33,32 +24,49 @@ MIT License
 				'filter' : 'alpha(opacity=' + ( options.opacity * 100 ) + ')'
 			}).fadeIn();
 
-			var popuptopmargin = ($('#' + popupid).height() + 10) / 2;
-			var popupleftmargin = ($('#' + popupid).width() + 10) / 2;
+			var popuptopmargin = ($( elem ).height() + 10) / 2;
+			var popupleftmargin = ($( elem ).width() + 10) / 2;
 
-			$('#' + popupid).css({
-			'margin-top' : -popuptopmargin,
-			'margin-left' : -popupleftmargin,
-			'top' : '50%',
-			'left' : '50%',
-			'position' : 'fixed'
+			$(elem).css({
+				'margin-top' : -popuptopmargin,
+				'margin-left' : -popupleftmargin,
+				'top' : '50%',
+				'left' : '50%',
+				'position' : 'fixed',
+				'z-index' : '10000'
 			});
+
+
+			var closer = function( e ) {
+				e.preventDefault();
+				$(elem + ", #fade" ).fadeOut( 'fast', function() {
+					$("#fade").detach();
+				});
+			}
 
 			$("#fade").click( closer );
 
+			if ( typeof( options.close ) != undefined ) {
+				$( "#" + options.close ).click( closer );
+			}
+
+			return $(elem);
+	}
+
+	$.createModal = function( elem, params ) {
+		return showModal( elem, params );
+	}
+
+	$.fn.modal = function ( params ) {
+		options = $.extend({}, defaults, options, params);
+
+		var popupid = $(this).attr('rel');
+		var opacity = typeof( options.opacity ) != undefined ? options.opacity : '.80';
+
+		$(this).on( 'click', function( ev ) {
+			ev.preventDefault();
+			showModal('#' + popupid, params);
 		});
-
-
-		var closer = function( e ) {
-			e.preventDefault();
-			$('#' + popupid+", #fade" ).fadeOut( 'fast', function() {
-				$("#fade").detach();
-			});
-		}
-
-		if ( typeof( options.close ) != undefined ) {
-			$( "#" + options.close ).click( closer );
-		}
 
 		return this;
 	};
