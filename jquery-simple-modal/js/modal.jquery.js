@@ -8,49 +8,53 @@ MIT License
 	var options;
 
 	var showModal = function( elem, params ) {
+		options = $.extend({}, defaults, options, params);
+
+		var opacity = typeof( options.opacity ) != undefined ? options.opacity : '.80';
+
 		$(elem).fadeIn();
 
 		$('body').append('<div id="fade"></div>');
-			$("#fade").css( { 
-				'display' : 'none', /* Скрыто по умолчанию */
-				'background' : options.bgColor,
-				'position': 'fixed',
-				'left' : '0',
-				'top' : '0',
-				'width' : '100%', 
-				'height' : '100%',
-				'opacity' : options.opacity,
-				'z-index' : '9999',
-				'filter' : 'alpha(opacity=' + ( options.opacity * 100 ) + ')'
-			}).fadeIn();
+		$("#fade").css( { 
+			'display' : 'none', /* Скрыто по умолчанию */
+			'background' : options.bgColor,
+			'position': 'fixed',
+			'left' : '0',
+			'top' : '0',
+			'width' : '100%', 
+			'height' : '100%',
+			'opacity' : options.opacity,
+			'z-index' : '9999',
+			'filter' : 'alpha(opacity=' + ( options.opacity * 100 ) + ')'
+		}).fadeIn();
 
-			var popuptopmargin = ($( elem ).height() + 10) / 2;
-			var popupleftmargin = ($( elem ).width() + 10) / 2;
+		var popuptopmargin = ($( elem ).height() + 10) / 2;
+		var popupleftmargin = ($( elem ).width() + 10) / 2;
 
-			$(elem).css({
-				'margin-top' : -popuptopmargin,
-				'margin-left' : -popupleftmargin,
-				'top' : '50%',
-				'left' : '50%',
-				'position' : 'fixed',
-				'z-index' : '10000'
+		$(elem).css({
+			'margin-top' : -popuptopmargin,
+			'margin-left' : -popupleftmargin,
+			'top' : '50%',
+			'left' : '50%',
+			'position' : 'fixed',
+			'z-index' : '10000'
+		});
+
+
+		var closer = function( e ) {
+			e.preventDefault();
+			$(elem + ", #fade" ).fadeOut( 'fast', function() {
+				$("#fade").detach();
 			});
+		}
 
+		$("#fade").click( closer );
 
-			var closer = function( e ) {
-				e.preventDefault();
-				$(elem + ", #fade" ).fadeOut( 'fast', function() {
-					$("#fade").detach();
-				});
-			}
+		if ( typeof( options.close ) != undefined ) {
+			$( "#" + options.close ).click( closer );
+		}
 
-			$("#fade").click( closer );
-
-			if ( typeof( options.close ) != undefined ) {
-				$( "#" + options.close ).click( closer );
-			}
-
-			return $(elem);
+		return $(elem);
 	}
 
 	$.createModal = function( elem, params ) {
@@ -58,10 +62,7 @@ MIT License
 	}
 
 	$.fn.modal = function ( params ) {
-		options = $.extend({}, defaults, options, params);
-
 		var popupid = $(this).attr('rel');
-		var opacity = typeof( options.opacity ) != undefined ? options.opacity : '.80';
 
 		$(this).on( 'click', function( ev ) {
 			ev.preventDefault();
