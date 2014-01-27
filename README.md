@@ -7,10 +7,10 @@ jquery-simple-modal
 `</div>`   
 
 2. Add in script block after jQuery and page initialization   
-`$('modal-box-a').modal()`
+`$('#modal-box-a').modal()`
 
 3. If you need use close button in modal use   
-`$('modal-box-a'.modal( {'close' : 'close-a' } );`   
+`$('#modal-box-a'.modal( {'close' : 'close-a' } );`   
 where `close-a` id of close button.
 
 4. You can use parameters to customize fading   
