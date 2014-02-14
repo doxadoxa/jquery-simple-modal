@@ -11,8 +11,9 @@ MIT License
 		options = $.extend({}, defaults, options, params);
 
 		var opacity = typeof( options.opacity ) != undefined ? options.opacity : '.80';
+		var $elem = $(elem);
 
-		$(elem).fadeIn();
+		$elem.fadeIn();
 
 		$('body').append('<div id="fade"></div>');
 		$("#fade").css( { 
@@ -28,10 +29,10 @@ MIT License
 			'filter' : 'alpha(opacity=' + ( options.opacity * 100 ) + ')'
 		}).fadeIn();
 
-		var popuptopmargin = ($( elem ).height() + parseInt( $( elem ).css('padding-top') ) ) / 2;
-		var popupleftmargin = ($( elem ).width() + parseInt( $( elem ).css('padding-left') ) ) / 2;
+		var popuptopmargin = ( $elem.outerHeight() ) / 2;
+		var popupleftmargin = ( $elem.outerWidth() ) / 2;
 
-		$(elem).css({
+		$elem.css({
 			'margin-top' : -popuptopmargin,
 			'margin-left' : -popupleftmargin,
 			'top' : '50%',
@@ -54,7 +55,7 @@ MIT License
 			$( "#" + options.close ).click( closer );
 		}
 
-		return $(elem);
+		return $elem;
 	}
 
 	$.createModal = function( elem, params ) {
