@@ -28,8 +28,8 @@ MIT License
 			'filter' : 'alpha(opacity=' + ( options.opacity * 100 ) + ')'
 		}).fadeIn();
 
-		var popuptopmargin = ($( elem ).height() + 10) / 2;
-		var popupleftmargin = ($( elem ).width() + 10) / 2;
+		var popuptopmargin = ($( elem ).height() + parseInt( $( elem ).css('padding-top') ) ) / 2;
+		var popupleftmargin = ($( elem ).width() + parseInt( $( elem ).css('padding-left') ) ) / 2;
 
 		$(elem).css({
 			'margin-top' : -popuptopmargin,
