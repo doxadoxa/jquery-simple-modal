@@ -27,7 +27,7 @@ MIT License
 			'opacity' : options.opacity,
 			'z-index' : '9999',
 			'filter' : 'alpha(opacity=' + ( options.opacity * 100 ) + ')'
-		}).fadeIn();
+		}).fadeIn('fast');
 
 		var popuptopmargin = ( $elem.outerHeight() ) / 2;
 		var popupleftmargin = ( $elem.outerWidth() ) / 2;
