@@ -42,17 +42,19 @@ MIT License
 		});
 
 
-		var closer = function( e ) {
-			e.preventDefault();
+		var closer = function() {
 			$(elem + ", #fade" ).fadeOut( 'fast', function() {
 				$("#fade").detach();
+				options.onClose && options.onClose();
 			});
+			
+			return false;
 		}
 
 		$("#fade").click( closer );
 
 		if ( typeof( options.close ) != undefined ) {
-			$( "#" + options.close ).click( closer );
+			$( "#" + options.close ).on('click', closer );
 		}
 
 		return $elem;
