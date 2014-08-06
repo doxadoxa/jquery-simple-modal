@@ -14,5 +14,7 @@ jquery-simple-modal
 where `close-a` id of close button.
 
 4. You can use parameters to customize fading   
-`bgColor` - fade background color   
-`opacity` - fade opacity level (0..1)   
+`bgColor` - fade background color, default #000
+`opacity` - fade opacity level (0..1), default 0.8
+`speed` - fade in and out speed, default normal
+`fadeID` - fader background element id, default #fade
