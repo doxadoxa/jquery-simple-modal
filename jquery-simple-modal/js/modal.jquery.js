@@ -4,7 +4,13 @@ https://github.com/doxadoxa/jquery-simple-modal
 MIT License
 ***********************************************/
 (function($) {
-	var defaults = { 'bgColor' : '#000', 'opacity' : '0.8'};
+	var defaults = { 
+		'bgColor' : '#000', 
+		'opacity' : '0.8', 
+		'speed' : 'normal',
+		'fadeID' : 'fade' 
+	};
+	
 	var options;
 
 	var showModal = function( elem, params ) {
@@ -13,10 +19,10 @@ MIT License
 		var opacity = typeof( options.opacity ) != undefined ? options.opacity : '.80';
 		var $elem = $(elem);
 
-		$elem.fadeIn();
+		$elem.fadeIn( options.speed );
 
-		$('body').append('<div id="fade" style="display:none;"></div>');
-		$("#fade").css( { 
+		$('body').append('<div id="' + options.fadeID + '" style="display:none;"></div>');
+		$('#' + options.fadeID ).css( { 
 			'background' : options.bgColor,
 			'position': 'fixed',
 			'left' : '0',
@@ -26,7 +32,7 @@ MIT License
 			'opacity' : options.opacity,
 			'z-index' : '9999',
 			'filter' : 'alpha(opacity=' + ( options.opacity * 100 ) + ')'
-		}).fadeIn('fast');
+		}).fadeIn( options.speed );
 
 		var popuptopmargin = ( $elem.outerHeight() ) / 2;
 		var popupleftmargin = ( $elem.outerWidth() ) / 2;
@@ -40,17 +46,16 @@ MIT License
 			'z-index' : '10000'
 		});
 
-
 		var closer = function() {
-			$(elem + ", #fade" ).fadeOut( 'fast', function() {
-				$("#fade").detach();
+			$( elem + ", #" + options.fadeID ).fadeOut( options.speed, function() {
+				$( "#" + options.fadeID ).detach();
 				options.onClose && options.onClose();
 			});
 			
 			return false;
 		}
 
-		$("#fade").click( closer );
+		$( "#" + options.fadeID ).click( closer );
 
 		if ( typeof( options.close ) != undefined ) {
 			$( "#" + options.close ).on('click', closer );
@@ -64,11 +69,11 @@ MIT License
 	}
 
 	$.fn.modal = function ( params ) {
-		var popupid = $(this).attr('rel');
+		var popupID = $(this).attr('rel');
 
 		$(this).on( 'click', function( ev ) {
 			ev.preventDefault();
-			showModal('#' + popupid, params);
+			showModal('#' + popupID, params);
 		});
 
 		return this;
