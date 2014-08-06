@@ -17,7 +17,6 @@ MIT License
 
 		$('body').append('<div id="fade" style="display:none;"></div>');
 		$("#fade").css( { 
-			//'display' : 'none', /* Скрыто по умолчанию */
 			'background' : options.bgColor,
 			'position': 'fixed',
 			'left' : '0',
